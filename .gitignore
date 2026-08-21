@@ -1,0 +1,13 @@
+node_modules
+out
+dist
+*.tgz
+coverage
+*.log
+.env
+.idea
+.DS_Store
+post-to-comment.config.json
+post-to-comment
+post-to-comment-macos
+tmp/
