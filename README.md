@@ -54,10 +54,10 @@ Options:
 {
   "defaultPersona": "professional",
   "ai": {
-    "default": "mycli",
+    "default": "claude",
     "providers": {
-      "mycli": {
-        "command": "mycli --pipe --once",
+      "claude": {
+        "command": ["claude", "-p"],
         "timeoutSec": 120
       }
     }

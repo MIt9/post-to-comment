@@ -39,7 +39,7 @@ export async function runSetupWizard(cwd: string, io: WizardIO, explicitPath?: s
     }
   }
 
-  const aiCmd = await io.ask("Enter AI CLI command prefix", "mycli --pipe --once");
+  const aiCmd = await io.ask("Enter AI CLI command prefix", "claude -p");
   const defaultPersona = await io.ask("Default persona key", "professional");
   const variantsStr = await io.ask("Number of comment variants to generate", "3");
   const variants = parseInt(variantsStr, 10) || 3;

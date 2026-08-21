@@ -4,10 +4,10 @@ import { join } from "node:path";
 export const DEFAULT_CONFIG = {
   defaultPersona: "professional",
   ai: {
-    default: "mycli",
+    default: "claude",
     providers: {
-      mycli: {
-        command: "mycli --pipe --once",
+      claude: {
+        command: ["claude", "-p"],
         timeoutSec: 120,
       },
     },
