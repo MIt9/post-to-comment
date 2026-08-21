@@ -8,6 +8,6 @@ coverage
 .idea
 .DS_Store
 post-to-comment.config.json
-post-to-comment
+/post-to-comment
 post-to-comment-macos
 tmp/
