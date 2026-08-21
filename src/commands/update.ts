@@ -30,6 +30,10 @@ export async function updateCommand(): Promise<void> {
       targetPath = join(homedir(), ".local/bin", "post-to-comment");
     }
 
+    try {
+      unlinkSync(targetPath);
+    } catch {}
+
     copyFileSync(tempPath, targetPath);
     chmodSync(targetPath, 0o755);
     try {
