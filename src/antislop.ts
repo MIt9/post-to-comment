@@ -20,14 +20,40 @@ CRITICAL DIRECTIVES FOR LINKEDIN/PROFESSIONAL COMMENTS (ANTI-AI SLOP):
    - Vary sentence structures and keep comments concise (2-5 sentences).
 `;
 
-export function appendCommentAntiSlopInstructions(prompt: string): string {
+export function appendCommentAntiSlopInstructions(prompt: string, maxWords?: number): string {
+  let instructions = COMMENT_ANTI_SLOP_INSTRUCTIONS.trim();
+  if (maxWords && maxWords > 0) {
+    instructions += `\n6. WORD COUNT LIMIT / ОБМЕЖЕННЯ СЛІВ:\n   - Keep the comment concise: maximum ${maxWords} words. Do NOT exceed ${maxWords} words.`;
+  }
+
   if (prompt.includes("ANTI-AI SLOP") || prompt.includes("STRICT LANGUAGE MATCHING")) {
+    if (maxWords && maxWords > 0 && !prompt.includes("WORD COUNT LIMIT")) {
+      return `${prompt.trim()}\n\nWORD COUNT LIMIT: Maximum ${maxWords} words.`;
+    }
     return prompt;
   }
-  return `${prompt.trim()}\n\n${COMMENT_ANTI_SLOP_INSTRUCTIONS.trim()}`;
+
+  return `${prompt.trim()}\n\n${instructions}`;
 }
 
-export function sanitizeComment(text: string): string {
+export function truncateToMaxWords(text: string, maxWords?: number): string {
+  if (!maxWords || maxWords <= 0) return text;
+  const words = text.trim().split(/\s+/);
+  if (words.length <= maxWords) return text;
+
+  // Truncate cleanly at maxWords
+  const truncatedWords = words.slice(0, maxWords);
+  let clean = truncatedWords.join(" ");
+
+  // Ensure trailing punctuation if sentence was cut
+  if (!/[.!?]$/.test(clean)) {
+    clean += ".";
+  }
+
+  return clean;
+}
+
+export function sanitizeComment(text: string, maxWords?: number): string {
   if (!text) return text;
   let clean = text.trim();
 
@@ -54,5 +80,10 @@ export function sanitizeComment(text: string): string {
   // 3. Replace em-dashes (—) with commas/periods
   clean = clean.replace(/\s*—\s*/g, ", ");
 
-  return clean.trim();
+  clean = clean.trim();
+  if (maxWords && maxWords > 0) {
+    clean = truncateToMaxWords(clean, maxWords);
+  }
+
+  return clean;
 }

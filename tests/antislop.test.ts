@@ -15,3 +15,13 @@ test("sanitizeComment removes sycophantic greetings in English & Ukrainian", () 
 test("sanitizeComment cleans colon reveals and quote marks", () => {
   expect(sanitizeComment('"Here\'s my take: This architecture makes sense."')).toBe("This architecture makes sense.");
 });
+
+test("sanitizeComment truncates text to maxWords when specified", () => {
+  const text = "One two three four five six seven eight nine ten.";
+  expect(sanitizeComment(text, 5)).toBe("One two three four five.");
+});
+
+test("appendCommentAntiSlopInstructions includes maxWords limit directive", () => {
+  const result = appendCommentAntiSlopInstructions("Prompt", 50);
+  expect(result).toContain("maximum 50 words");
+});

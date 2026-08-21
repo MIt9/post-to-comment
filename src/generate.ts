@@ -29,9 +29,10 @@ export async function generateComments(
     throw new Error(`Unknown AI provider: "${providerKey}". Available: ${Object.keys(config.ai.providers).join(", ")}`);
   }
 
+  const maxWords = options.maxWords ?? persona.maxWords;
   const promptFilePath = join(config.configDir, persona.promptFile);
   const rawPrompt = existsSync(promptFilePath) ? readFileSync(promptFilePath, "utf-8") : "Write a professional, insightful comment.";
-  const prompt = appendCommentAntiSlopInstructions(rawPrompt);
+  const prompt = appendCommentAntiSlopInstructions(rawPrompt, maxWords);
 
   const count = options.variantCount ?? persona.variants ?? 3;
   const variants: string[] = [];
@@ -41,7 +42,7 @@ export async function generateComments(
     if (!result.ok) {
       throw new Error(result.stderr.trim() || "AI provider exited with a non-zero status");
     }
-    const clean = sanitizeComment(result.stdout.trim());
+    const clean = sanitizeComment(result.stdout.trim(), maxWords);
     variants.push(clean);
   }
 

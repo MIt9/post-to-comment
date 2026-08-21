@@ -33,6 +33,7 @@ async function main(): Promise<void> {
       config: { type: "string" },
       persona: { type: "string" },
       count: { type: "string", short: "n" },
+      "max-words": { type: "string", short: "w" },
       out: { type: "string", short: "o" },
       json: { type: "boolean" },
       help: { type: "boolean", short: "h" },
@@ -81,6 +82,7 @@ async function main(): Promise<void> {
 
   const personaKey = (typeof values.persona === "string" ? values.persona : positionals[1]);
   const variantCount = values.count ? parseInt(String(values.count), 10) : undefined;
+  const maxWordsVal = values["max-words"] ? parseInt(String(values["max-words"]), 10) : undefined;
   const jsonOutput = Boolean(values.json);
   const outFile = typeof values.out === "string" ? values.out : undefined;
 
@@ -89,6 +91,7 @@ async function main(): Promise<void> {
     postText: postInput,
     personaKey,
     variantCount,
+    maxWords: maxWordsVal,
     jsonOutput,
     outFile,
   });

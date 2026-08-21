@@ -8,6 +8,7 @@ export interface PersonaConfig {
   description: string;
   promptFile: string;
   variants?: number;
+  maxWords?: number;
   ai?: string;
 }
 
@@ -28,6 +29,7 @@ export interface CommentGenerateOptions {
   postText: string;
   personaKey?: string;
   variantCount?: number;
+  maxWords?: number;
   jsonOutput?: boolean;
   outFile?: string;
 }

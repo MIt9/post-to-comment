@@ -12,6 +12,7 @@ Commands:
 Options:
   --persona <key>          Persona key from config (default: defaultPersona)
   --count, -n <number>    Number of comment variants to generate (default: 3)
+  --max-words, -w <n>     Maximum word count limit per comment
   --out, -o <path>        Save comments to specified output file (default: stdout)
   --json                  Output comment variants as a JSON array
   --config <path>         Path to config file (default: ./post-to-comment.config.json)
