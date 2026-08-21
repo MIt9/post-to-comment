@@ -12,6 +12,10 @@ Given a post/article (as raw text or a file path), `post-to-comment` invokes you
 3. **Multiple Output Formats:** Output cleanly to stdout (text or `--json` array for AI pipelines) or save directly to a file (`--out comments.md`).
 4. **Configurable Personas:** Define custom personas/styles (e.g., `professional`, `engineer`, `thoughtful`, `witty`) via `post-to-comment.config.json`.
 
+## AI Agent Skill (Claude Code / AGY)
+
+This repository includes a skill definition for AI agents at [skills/post-to-comment/SKILL.md](skills/post-to-comment/SKILL.md). When using Claude Code or Antigravity, the skill will be automatically discovered to guide AI agents on generating comments without AI slop.
+
 ## Quick Start
 
 ```bash
