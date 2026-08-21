@@ -12,6 +12,26 @@ Given a post/article (as raw text or a file path), `post-to-comment` invokes you
 3. **Multiple Output Formats:** Output cleanly to stdout (text or `--json` array for AI pipelines) or save directly to a file (`--out comments.md`).
 4. **Configurable Personas:** Define custom personas/styles (e.g., `professional`, `engineer`, `thoughtful`, `witty`) via `post-to-comment.config.json`.
 
+## Install (macOS, no Bun/git required)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/MIt9/post-to-comment/main/install.sh | sh
+```
+
+Downloads the latest executable to `~/.local/bin/post-to-comment` and checks if it's on your `PATH`. Then run the interactive setup wizard to configure your AI provider (e.g. Claude Code `claude -p`) and personas:
+
+```bash
+post-to-comment setup
+```
+
+Prefer manual installation? Download the binary from the [latest release](https://github.com/MIt9/post-to-comment/releases/latest) instead:
+
+```bash
+chmod +x post-to-comment-macos
+xattr -d com.apple.quarantine post-to-comment-macos
+mv post-to-comment-macos ~/.local/bin/post-to-comment
+```
+
 ## AI Agent Skill (Claude Code / AGY)
 
 This repository includes a skill definition for AI agents at [skills/post-to-comment/SKILL.md](skills/post-to-comment/SKILL.md). When using Claude Code or Antigravity, the skill will be automatically discovered to guide AI agents on generating comments without AI slop.
